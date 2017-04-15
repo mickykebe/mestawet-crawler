@@ -1,3 +1,3 @@
 const extract = require('../../scraper');
 
-module.exports = () => extract('./config.json');
+module.exports = () => extract(`${__dirname}/config.json`);

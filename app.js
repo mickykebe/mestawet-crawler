@@ -4,7 +4,7 @@ const fs = require('fs');
 
 function getModuleFiles() {
     return new Promise((resolve, reject) => {
-        fs.readdir(`${__dirname}/extraction`, (err, files) => {
+        fs.readdir(`${__dirname}/extraction/extraction-modules`, (err, files) => {
             if (err) {
                 reject(err);
             } else {
@@ -26,8 +26,8 @@ function getModuleFiles() {
     });
 }*/
 
-function fetch(file) {
-    const extractFn = require(`${__dirname}/extraction/${file}`);
+function fetch(module) {
+    const extractFn = require(`${__dirname}/extraction/extraction-modules/${module}`);
     return extractFn();
 }
 
@@ -54,7 +54,7 @@ function fetchBatch() {
     }).on('end', () => {
         sentPostUrls = JSON.parse(rawSentPostUrls);
         getModuleFiles()
-            .then(files => Promise.all(files.map(fetch)))
+            .then(modules => Promise.all(modules.map(fetch)))
             .then(results => extractNewPosts(results, sentPostUrls))
             .then(console.log)
             .catch(console.log);

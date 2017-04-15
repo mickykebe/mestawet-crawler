@@ -1,7 +1,7 @@
 const extract = require('../../scraper');
 
 module.exports = () =>
-    extract('./config.json')
+    extract(`${__dirname}/config.json`)
         .then((results) => {
             const firstPage = results.slice(0, 6);
             const secondPage = results.slice(10, 16);

@@ -1,9 +1,9 @@
 const assert = require('assert');
-const extractAddisadmas = require('../extraction/addisadmas.js');
-const extractEthiopianreporter = require('../extraction/ethiopianreporter.js');
-const extractSatenaw = require('../extraction/satenaw.js');
-const extractZehabesha = require('../extraction/zehabesha.js');
-const extractFanabc = require('../extraction/fanabc.js');
+const extractAddisadmas = require('../extraction/extraction-modules/addisadmas');
+const extractEthiopianreporter = require('../extraction/extraction-modules/ethiopianreporter');
+const extractSatenaw = require('../extraction/extraction-modules/satenaw');
+const extractZehabesha = require('../extraction/extraction-modules/zehabesha');
+const extractFanabc = require('../extraction/extraction-modules/fanabc');
 
 describe('test extractors', function () {
     this.timeout(60000);
@@ -47,7 +47,7 @@ describe('test extractors', function () {
         });
     });
 
-    it('fababc', (done) => {
+    it('fanabc', (done) => {
         extractFanabc().then((results) => {
             assert(results.length === 12);
             assertPostFields(results[0]);
