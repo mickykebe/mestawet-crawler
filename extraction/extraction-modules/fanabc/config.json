@@ -1,0 +1,13 @@
+{
+    "url": "http://www.fanabc.com/index.php/news.html",
+    "scope": "article",
+    "selectors": {
+        "title": ".catItemTitle a",
+        "url": ".catItemTitle a@href",
+        "description": ".catItemIntroText",
+        "thumbnailUrl": ".catItemImage img@src"
+    },
+    "paginate": ".pagination-next a@href",
+    "limit": 3,
+    "postType": "article"
+}

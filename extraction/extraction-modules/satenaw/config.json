@@ -1,0 +1,13 @@
+{
+    "url": "http://www.satenaw.com/amharic/archives/category/%E1%8B%A8%E1%8B%95%E1%88%88%E1%89%B1-%E1%8B%9C%E1%8A%93",
+    "scope": ".article-big",
+    "selectors": {
+        "title": "h2 a",
+        "url": "h2 a@href",
+        "description": ".article-content p:nth-of-type(2)",
+        "thumbnailUrl": ".article-photo img@src"
+    },
+    "paginate": "a.next@href",
+    "limit": 2,
+    "postType": "article"
+}

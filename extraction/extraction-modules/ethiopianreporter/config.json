@@ -1,0 +1,13 @@
+{
+    "url": "http://ethiopianreporter.com/tags/%E1%8B%9C%E1%8A%93",
+    "scope": "article",
+    "selectors": {
+        "title": ".post-title h3 a",
+        "url": ".post-title h3 a@href",
+        "description": ".post-content-innder p",
+        "thumbnailUrl": "img@src"
+    },
+    "paginate": ".pager-next a@href",
+    "limit": 2,
+    "postType": "article"
+}

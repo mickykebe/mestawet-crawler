@@ -1,0 +1,14 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "mocha": true,
+    "mongo": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "indent": ["error", 4],
+    "no-underscore-dangle": "warn",
+    "no-param-reassign": "off"
+  }
+}

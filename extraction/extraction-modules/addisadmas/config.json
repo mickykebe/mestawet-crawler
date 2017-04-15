@@ -1,0 +1,13 @@
+{
+    "url": "http://www.addisadmassnews.com/index.php?option=com_k2&view=itemlist&layout=category&task=category&id=1&Itemid=180",
+    "scope": ".catItemView",
+    "selectors": {
+        "title": ".catItemTitle a",
+        "url": ".catItemTitle a@href",
+        "description": ".catItemIntroText",
+        "thumbnailUrl": ".catItemImage img@src"
+    },
+    "paginate": ".pagination a@href",
+    "limit": 2,
+    "postType": "article"
+}

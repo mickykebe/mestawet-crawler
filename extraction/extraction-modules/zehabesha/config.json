@@ -1,0 +1,13 @@
+{
+    "url": "http://www.zehabesha.com/amharic/?cat=1",
+    "scope": ".post",
+    "selectors": {
+        "title": "h2 a",
+        "url": "h2 a@href",
+        "thumbnailUrl": "img@src",
+        "description": "p"
+    },
+    "paginate": "a.pagi-next@href",
+    "limit": 2,
+    "postType": "article"
+}
