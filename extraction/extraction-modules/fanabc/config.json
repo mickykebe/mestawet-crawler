@@ -1,6 +1,6 @@
 {
     "url": "http://www.fanabc.com/index.php/news.html",
-    "scope": "article",
+    "scope": ".catItemView",
     "selectors": {
         "title": ".catItemTitle a",
         "url": ".catItemTitle a@href",

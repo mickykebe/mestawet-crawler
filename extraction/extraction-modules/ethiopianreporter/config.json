@@ -4,7 +4,7 @@
     "selectors": {
         "title": ".post-title h3 a",
         "url": ".post-title h3 a@href",
-        "description": ".post-content-innder p",
+        "description": ".post-content-inner p",
         "thumbnailUrl": "img@src"
     },
     "paginate": ".pager-next a@href",

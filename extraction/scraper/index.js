@@ -41,14 +41,7 @@ function scrape(config) {
 
 function extract(configPath) {
     return readConfig(configPath)
-        .then(scrape)
-        .then((results) => {
-            const posts = results.map((post) => {
-                post.date = Date.now();
-                return post;
-            });
-            return posts;
-        });
+        .then(scrape);
 }
 
 module.exports = extract;
