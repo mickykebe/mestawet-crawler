@@ -1,0 +1,4 @@
+{
+    //jwt secret key
+    "tokenSecret": "S@crament0"
+}
