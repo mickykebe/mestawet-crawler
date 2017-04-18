@@ -97,7 +97,7 @@ function addToSentUrls(newPosts, sentPostUrls, sentUrlsFilePath) {
     return new Promise((resolve, reject) => {
         const newPostUrls = newPosts.map(post => post.url);
         const writable = fs.createWriteStream(sentUrlsFilePath, { encoding: 'utf8' });
-        sentPostUrls = [...sentPostUrls, ...newPostUrls];
+        sentPostUrls = [...newPostUrls, ...sentPostUrls];
         writable.write(JSON.stringify(sentPostUrls), (err) => {
             if (err) {
                 reject(err);
@@ -127,6 +127,8 @@ function fetchBatch() {
 }
 
 cron.schedule('30 * * * *', fetchBatch);
+
+fetchBatch();
 
 
 /* http.get('http://www.addisadmassnews.com/index.php?option=com_k2&view=itemlist&layout=category&task=category&id=1&Itemid=180&format=feed&type=atom',
