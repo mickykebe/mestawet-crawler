@@ -45,6 +45,7 @@ function extractNewPosts(postCollection, sentPostUrls) {
             }
         });
     });
+    console.log(`${newPosts.length} new posts`);
     return newPosts;
 }
 
@@ -111,6 +112,7 @@ function addToSentUrls(newPosts, sentPostUrls, sentUrlsFilePath) {
 function fetchBatch() {
     let sentPostUrls;
     const sentUrlsFilePath = `${__dirname}/sent-post-urls.json`;
+    console.log('Started crawl session ...');
     getSentUrls(sentUrlsFilePath)
         .then((postUrls) => {
             sentPostUrls = postUrls;
@@ -120,11 +122,11 @@ function fetchBatch() {
         .then(results => extractNewPosts(results, sentPostUrls))
         .then(postToServer)
         .then(posts => addToSentUrls(posts, sentPostUrls, sentUrlsFilePath))
-        .then(console.log)
+        .then(() => console.log('Crawl complete.'))
         .catch(console.log);
 }
 
-fetchBatch();
+cron.schedule('30 * * * *', fetchBatch);
 
 
 /* http.get('http://www.addisadmassnews.com/index.php?option=com_k2&view=itemlist&layout=category&task=category&id=1&Itemid=180&format=feed&type=atom',
