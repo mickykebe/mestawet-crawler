@@ -1,4 +1,7 @@
 {
-    //jwt secret key
-    "tokenSecret": "S@crament0"
+    "tokenSecret": "[secret]",
+    "serverHostName": "localhost",
+    "serverPort": 3050,
+    "postPath": "/posts",
+    "jwtPayload": "[payload]"
 }

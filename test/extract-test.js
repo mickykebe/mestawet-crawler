@@ -47,7 +47,7 @@ describe('test extractors', function () {
         });
     });
 
-    it.only('fanabc', (done) => {
+    it('fanabc', (done) => {
         extractFanabc().then((results) => {
             assert(results.length === 12);
             assertPostFields(results[0]);
