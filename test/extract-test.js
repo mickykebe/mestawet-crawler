@@ -1,24 +1,32 @@
 const assert = require('assert');
+const youtubeConfig = require('../extraction/extraction-modules/youtube/config');
 const extractAddisadmas = require('../extraction/extraction-modules/addisadmas');
 const extractEthiopianreporter = require('../extraction/extraction-modules/ethiopianreporter');
 const extractSatenaw = require('../extraction/extraction-modules/satenaw');
 const extractZehabesha = require('../extraction/extraction-modules/zehabesha');
 const extractFanabc = require('../extraction/extraction-modules/fanabc');
+const extractYoutube = require('../extraction/extraction-modules/youtube');
 
 describe('test extractors', function () {
     this.timeout(60000);
 
-    function assertPostFields(post) {
+    function assertArticleFields(post) {
         assert(post.type === 'article');
         assert(post.title !== '');
         assert(post.url !== '');
         assert(post.description !== '');
     }
 
+    function assertVideoFields(post) {
+        assert(post.type === 'video');
+        assert(post.videoId !== '');
+        assert(post.title !== '');
+    }
+
     it('AddisAdmas', (done) => {
         extractAddisadmas().then((results) => {
             assert(results.length === 12);
-            assertPostFields(results[0]);
+            assertArticleFields(results[0]);
             done();
         });
     });
@@ -26,7 +34,7 @@ describe('test extractors', function () {
     it('EthiopianReporter', (done) => {
         extractEthiopianreporter().then((results) => {
             assert(results.length === 20);
-            assertPostFields(results[0]);
+            assertArticleFields(results[0]);
             done();
         });
     });
@@ -34,7 +42,7 @@ describe('test extractors', function () {
     it('Satenaw', (done) => {
         extractSatenaw().then((results) => {
             assert(results.length === 34);
-            assertPostFields(results[0]);
+            assertArticleFields(results[0]);
             done();
         });
     });
@@ -42,7 +50,7 @@ describe('test extractors', function () {
     it('Zehabesha', (done) => {
         extractZehabesha().then((results) => {
             assert(results.length === 60);
-            assertPostFields(results[0]);
+            assertArticleFields(results[0]);
             done();
         });
     });
@@ -50,7 +58,16 @@ describe('test extractors', function () {
     it('fanabc', (done) => {
         extractFanabc().then((results) => {
             assert(results.length === 12);
-            assertPostFields(results[0]);
+            assertArticleFields(results[0]);
+            done();
+        });
+    });
+
+    it.only('youtube', (done) => {
+        extractYoutube().then((results) => {
+            assert(results.length === youtubeConfig.channels.length);
+            assert(results[0].length === youtubeConfig.videosPerChannel);
+            assertVideoFields(results[0][0]);
             done();
         });
     });
