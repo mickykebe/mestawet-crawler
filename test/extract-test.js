@@ -63,11 +63,11 @@ describe('test extractors', function () {
         });
     });
 
-    it('youtube', (done) => {
+    it.only('youtube', (done) => {
         extractYoutube().then((results) => {
-            assert(results.length === youtubeConfig.channels.length);
-            assert(results[0].length === youtubeConfig.videosPerChannel);
-            assertVideoFields(results[0][0]);
+            const { channels, videosPerChannel } = youtubeConfig;
+            assert(results.length === channels.length * videosPerChannel);
+            assertVideoFields(results[0]);
             done();
         });
     });

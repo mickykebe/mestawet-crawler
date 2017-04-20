@@ -39,4 +39,9 @@ function channelVideos(channelId) {
 }
 
 
-module.exports = () => Promise.all(config.channels.map(channelVideos));
+module.exports = () =>
+    Promise.all(config.channels.map(channelVideos))
+        .then(results =>
+            results.reduce((sequence, videos) =>
+                sequence.concat(videos),
+            []));
