@@ -30,6 +30,20 @@ describe('app tests', () => {
                 type: 'article',
             },
         ],
+        [
+            {
+                videoId: 'dXNNNk_0HpI',
+                title: 'Ep. 242: Crowd Beginning To Exit Long Dollar Trade',
+                thumbnailUrl: 'https://i.ytimg.com/vi/dXNNNk_0HpI/hqdefault.jpg',
+                type: 'video',
+            },
+            {
+                videoId: 'O8wAFa-TbM4',
+                title: 'Looks like neither Obamacare nor Yellen will be replaced',
+                thumbnailUrl: 'https://i.ytimg.com/vi/O8wAFa-TbM4/hqdefault.jpg',
+                type: 'video',
+            },
+        ],
     ];
 
     it('filterNewPosts fetches unsaved new posts', (done) => {
@@ -38,6 +52,8 @@ describe('app tests', () => {
                 assert(posts[0] === scrapeResults[0][0]);
                 assert(posts[1] === scrapeResults[0][1]);
                 assert(posts[2] === scrapeResults[1][0]);
+                assert(posts[3] === scrapeResults[2][0]);
+                assert(posts[4] === scrapeResults[2][1]);
                 done();
             });
     });
@@ -56,6 +72,8 @@ describe('app tests', () => {
                         assertFindInDbPosts(dbPosts, scrapeResults[0][0]);
                         assertFindInDbPosts(dbPosts, scrapeResults[0][1]);
                         assertFindInDbPosts(dbPosts, scrapeResults[1][0]);
+                        assertFindInDbPosts(dbPosts, scrapeResults[2][0]);
+                        assertFindInDbPosts(dbPosts, scrapeResults[2][1]);
                         done();
                     });
             });
@@ -77,12 +95,19 @@ describe('app tests', () => {
                 thumbnailUrl: 'http://www.satenaw.com/amharic/wp-content/uploads/2017/04/Bekele-Gerba-210x140_c.png',
                 type: 'article',
             },
+            {
+                videoId: 'O8wAFa-TbM4',
+                title: 'Looks like neither Obamacare nor Yellen will be replaced',
+                thumbnailUrl: 'https://i.ytimg.com/vi/O8wAFa-TbM4/hqdefault.jpg',
+                type: 'video',
+            },
         ];
         app.saveSentPosts(posts)
             .then(() => app.filterNewPosts(scrapeResults))
             .then((newPosts) => {
-                assert(newPosts.length === 1);
+                assert(newPosts.length === 2);
                 assert(newPosts[0] === scrapeResults[0][0]);
+                assert(newPosts[1] === scrapeResults[2][0]);
                 done();
             });
     });
