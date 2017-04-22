@@ -1,4 +1,5 @@
 {
+    "sourceId": "addisadmas",
     "url": "http://www.addisadmassnews.com/index.php?option=com_k2&view=itemlist&layout=category&task=category&id=1&Itemid=180",
     "scope": ".catItemView",
     "selectors": {

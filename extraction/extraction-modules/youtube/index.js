@@ -13,8 +13,8 @@ function parseVideos(data) {
     return [];
 }
 
-function channelVideos(channelId) {
-    const requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${config.apiKey}&part=snippet&channelId=${channelId}&fields=items(id(videoId),snippet(title))&maxResults=${config.videosPerChannel}&type=video&order=date`;
+function sourceVideos(source) {
+    const requestUrl = `https://www.googleapis.com/youtube/v3/search?key=${config.apiKey}&part=snippet&channelId=${source.channelId}&fields=items(id(videoId),snippet(title))&maxResults=${config.videosPerChannel}&type=video&order=date`;
     return new Promise((resolve, reject) => {
         https.get(requestUrl, (res) => {
             const { statusCode } = res;
@@ -25,7 +25,11 @@ function channelVideos(channelId) {
                 res.on('data', (chunk) => {
                     data += chunk;
                 }).on('end', () => {
-                    const videos = parseVideos(JSON.parse(data));
+                    const videos = parseVideos(JSON.parse(data)).map((video) => {
+                        video.sourceId = source.id;
+                        return video;
+                    });
+                    videos.sourceId = source.id;
                     resolve(videos);
                 }).on('error', (err) => {
                     reject(err);
@@ -40,7 +44,7 @@ function channelVideos(channelId) {
 
 
 module.exports = () =>
-    Promise.all(config.channels.map(channelVideos))
+    Promise.all(config.sources.map(sourceVideos))
         .then(results =>
             results.reduce((sequence, videos) =>
                 sequence.concat(videos),

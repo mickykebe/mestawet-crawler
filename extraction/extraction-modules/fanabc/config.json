@@ -1,4 +1,5 @@
 {
+    "sourceId": "fanabc",
     "url": "http://www.fanabc.com/index.php/news.html",
     "scope": ".catItemView",
     "selectors": {

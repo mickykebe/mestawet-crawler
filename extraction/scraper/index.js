@@ -16,7 +16,7 @@ function readConfig(configFile) {
 }
 
 function scrape(config) {
-    const { url, scope, selectors, paginate, limit, postType } = config;
+    const { sourceId, url, scope, selectors, paginate, limit, postType } = config;
 
     return new Promise((resolve, reject) => {
         xray(url, scope, [selectors])
@@ -27,6 +27,7 @@ function scrape(config) {
             } else {
                 const posts = results.map((post) => {
                     post.type = postType;
+                    post.sourceId = sourceId;
                     return post;
                 });
                 resolve(posts);
