@@ -102,9 +102,19 @@ function postToServer(posts) {
     });
 }
 
+function saveSentPost(post) {
+    return Post.create(post)
+        .catch((err) => {
+            if (err.code === 11000) {
+                return null;
+            }
+            throw err;
+        });
+}
+
 function saveSentPosts(posts) {
     const dbPosts = posts.map(post => ({ _id: getPostId(post) }));
-    return Post.create(dbPosts).then(() => posts);
+    return Promise.all(dbPosts.map(saveSentPost));
 }
 
 

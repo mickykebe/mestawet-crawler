@@ -73,7 +73,7 @@ describe('test extractors', function () {
         });
     });
 
-    it.only('youtube', (done) => {
+    it('youtube', (done) => {
         extractYoutube().then((results) => {
             const { sources, videosPerChannel } = youtubeConfig;
             assert(results.length === sources.length * videosPerChannel);
