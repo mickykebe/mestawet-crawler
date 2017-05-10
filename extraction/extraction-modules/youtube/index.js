@@ -45,7 +45,9 @@ function sourceVideos(source) {
 
 module.exports = () =>
     Promise.all(config.sources.map(sourceVideos))
-        .then(results =>
-            results.reduce((sequence, videos) =>
+        .then((results) => {
+            const allVideos = results.reduce((sequence, videos) =>
                 sequence.concat(videos),
-            []));
+            []);
+            return allVideos;
+        });

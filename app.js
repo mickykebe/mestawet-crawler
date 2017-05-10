@@ -28,27 +28,18 @@ function getPostId(post) {
 }
 
 function filterNewSourcePosts(sourcePosts) {
-    const newPostsPromise = sourcePosts.reduce((sequence, post) =>
+    return sourcePosts.reduce((sequence, post) =>
         sequence.then(newPosts =>
-            new Promise((resolve, reject) => {
+            new Promise((resolve) => {
                 const postKey = getPostId(post);
                 Post.count({ _id: postKey })
                     .then((count) => {
-                        if (count > 0) {
-                            reject(newPosts);
-                        } else {
+                        if (count === 0) {
                             newPosts.push(post);
-                            resolve(newPosts);
                         }
+                        resolve(newPosts);
                     });
             })), Promise.resolve([]));
-
-    return newPostsPromise.catch((newPosts) => {
-        if (Array.isArray(newPosts)) {
-            return newPosts;
-        }
-        throw newPosts;
-    });
 }
 
 function filterNewPosts(postCollection) {
