@@ -125,7 +125,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 module.exports = () => {
-    cron.schedule('30 * * * *', fetchBatch);
+    cron.schedule('0,30 * * * *', fetchBatch);
 
     fetchBatch();
 };
