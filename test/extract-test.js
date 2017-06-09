@@ -10,76 +10,86 @@ const zehabeshaConfig = require('../extraction/extraction-modules/zehabesha/conf
 const extractZehabesha = require('../extraction/extraction-modules/zehabesha');
 const fanabcConfig = require('../extraction/extraction-modules/fanabc/config');
 const extractFanabc = require('../extraction/extraction-modules/fanabc');
+const extractVOA = require('../extraction/extraction-modules/voa');
 const extractYoutube = require('../extraction/extraction-modules/youtube');
 
 describe('test extractors', function () {
-    this.timeout(60000);
+  this.timeout(60000);
 
-    function assertArticleFields(post) {
-        assert(post.type === 'article');
-        assert(post.title !== '');
-        assert(post.url !== '');
-        assert(post.description !== '');
-    }
+  function assertArticleFields(post) {
+    assert(post.type === 'article');
+    assert(post.title !== '');
+    assert(post.url !== '');
+    assert(post.description !== '');
+  }
 
-    function assertVideoFields(post) {
-        assert(post.type === 'video');
-        assert(post.videoId !== '');
-        assert(post.title !== '');
-    }
+  function assertVideoFields(post) {
+    assert(post.type === 'video');
+    assert(post.videoId !== '');
+    assert(post.title !== '');
+  }
 
-    it('AddisAdmas', (done) => {
-        extractAddisadmas().then((results) => {
-            assert(results.length === 12);
-            assert(results[0].sourceId = addisAdmasConfig.sourceId);
-            assertArticleFields(results[0]);
-            done();
-        });
+  it('AddisAdmas', (done) => {
+    extractAddisadmas().then((results) => {
+      assert(results.length === 12);
+      assert(results[0].sourceId = addisAdmasConfig.sourceId);
+      assertArticleFields(results[0]);
+      done();
     });
+  });
 
-    it('EthiopianReporter', (done) => {
-        extractEthiopianreporter().then((results) => {
-            assert(results.length === 20);
-            assert(results[0].sourceId = ethiopianreporterConfig.sourceId);
-            assertArticleFields(results[0]);
-            done();
-        });
+  it('EthiopianReporter', (done) => {
+    extractEthiopianreporter().then((results) => {
+      assert(results.length === 20);
+      assert(results[0].sourceId = ethiopianreporterConfig.sourceId);
+      assertArticleFields(results[0]);
+      done();
     });
+  });
 
-    it('Satenaw', (done) => {
-        extractSatenaw().then((results) => {
-            assert(results.length === 34);
-            assert(results[0].sourceId = satenawConfig.sourceId);
-            assertArticleFields(results[0]);
-            done();
-        });
+  it('Satenaw', (done) => {
+    extractSatenaw().then((results) => {
+      assert(results.length === 34);
+      assert(results[0].sourceId = satenawConfig.sourceId);
+      assertArticleFields(results[0]);
+      done();
     });
+  });
 
-    it('Zehabesha', (done) => {
-        extractZehabesha().then((results) => {
-            assert(results.length === 60);
-            assert(results[0].sourceId === zehabeshaConfig.sourceId);
-            assertArticleFields(results[0]);
-            done();
-        });
+  it('Zehabesha', (done) => {
+    extractZehabesha().then((results) => {
+      assert(results.length === 60);
+      assert(results[0].sourceId === zehabeshaConfig.sourceId);
+      assertArticleFields(results[0]);
+      done();
     });
+  });
 
-    it('fanabc', (done) => {
-        extractFanabc().then((results) => {
-            assert(results.length === 12);
-            assert(results[0].sourceId === fanabcConfig.sourceId);
-            assertArticleFields(results[0]);
-            done();
-        });
+  it('fanabc', (done) => {
+    extractFanabc().then((results) => {
+      assert(results.length === 12);
+      assert(results[0].sourceId === fanabcConfig.sourceId);
+      assertArticleFields(results[0]);
+      done();
     });
+  });
 
-    it('youtube', (done) => {
-        extractYoutube().then((results) => {
-            const { sources, videosPerChannel } = youtubeConfig;
-            assert(results.length === sources.length * videosPerChannel);
-            assert(results[0].sourceId === youtubeConfig.sources[0].id);
-            assertVideoFields(results[0]);
-            done();
-        });
+  it.only('voa', (done) => {
+    extractVOA().then((results) => {
+      assert(results.length === 20);
+      assert(results[0].sourceId === extractVOA.SOURCE_ID);
+      assertArticleFields(results[0]);
+      done();
     });
+  });
+
+  it('youtube', (done) => {
+    extractYoutube().then((results) => {
+      const { sources, videosPerChannel } = youtubeConfig;
+      assert(results.length === sources.length * videosPerChannel);
+      assert(results[0].sourceId === youtubeConfig.sources[0].id);
+      assertVideoFields(results[0]);
+      done();
+    });
+  });
 });

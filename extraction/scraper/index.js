@@ -19,9 +19,12 @@ function scrape(config) {
     const { sourceId, url, scope, selectors, paginate, limit, postType } = config;
 
     return new Promise((resolve, reject) => {
-        xray(url, scope, [selectors])
-        .paginate(paginate)
-        .limit(limit)((err, results) => {
+        const xrayFn = xray(url, scope, [selectors])
+            .limit(limit);
+        if (limit > 0) {
+            xrayFn.paginate(paginate);
+        }
+        xrayFn((err, results) => {
             if (err) {
                 reject(err);
             } else {
