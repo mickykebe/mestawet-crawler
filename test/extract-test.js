@@ -38,7 +38,7 @@ describe('test extractors', function () {
     });
   });
 
-  it('EthiopianReporter', (done) => {
+  it.only('EthiopianReporter', (done) => {
     extractEthiopianreporter().then((results) => {
       assert(results.length === 20);
       assert(results[0].sourceId = ethiopianreporterConfig.sourceId);

@@ -8,6 +8,8 @@
         "description": ".post-content-inner p",
         "thumbnailUrl": "img@src"
     },
+    "textSelector": ".field-type-text-with-summary",
+    "encodeURI": false,
     "paginate": ".pager-next a@href",
     "limit": 2,
     "postType": "article"

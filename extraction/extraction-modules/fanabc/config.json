@@ -8,6 +8,8 @@
         "description": ".catItemIntroText",
         "thumbnailUrl": ".catItemImage img@src"
     },
+    "textSelector": ".itemFullText",
+    "encodeURI": true,
     "paginate": ".pagination-next a@href",
     "limit": 3,
     "postType": "article"
